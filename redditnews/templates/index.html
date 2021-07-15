@@ -1,0 +1,33 @@
+{% block content %}
+<h1>Reddit</h1>
+<a class="btn btn-primary" href="{% url 'create' %}">New Post</a>
+<br>
+<br>
+
+{% for post in posts.all %}
+{% if user.is_authenticated %}
+
+<table>
+    <tr>
+        
+        <td style="padding-right: 20px;"><a href="{{ post.url }}">{{ post.title }}</a><br>{{ post.pub_date_pretty }} by
+            <a href="url 'profile' post.author.id %">{{ post.author.username }}</a></td>
+    </tr>
+</table>
+
+
+{% else %}
+
+<table>
+    <tr>
+        <td style="padding-right: 20px;"><a href="#" onclick="signup()"><span class="glyphicon glyphicon-triangle-top"
+                    aria-hidden="true"></span></a><br>{{ post.votes_total }}<br><a href="#" onclick="signup()"><span
+                    class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></td>
+        <td style="padding-right: 20px;"><a href="{{ post.url }}">{{ post.title }}</a><br>{{ post.pub_date_pretty }} by
+            <a href="{% url 'posts:profile' post.author.id %}">{{ post.author.username }}</a></td>
+    </tr>
+</table>
+
+{% endif %}
+{% endfor %}
+{% endblock %}
